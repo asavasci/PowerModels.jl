@@ -175,7 +175,7 @@ function optimize!(pm::GenericPowerModel, optimizer::JuMP.OptimizerFactory)
     end
 
     try
-        solve_time = getsolvetime(pm.model)
+        solve_time = MOI.get(pm.model, MOI.SolveTime())
     catch
         warn(LOGGER, "the given optimizer does not provide the SolveTime() attribute, falling back on @timed.  This is not a rigorous timing value.");
     end
